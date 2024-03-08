@@ -1,15 +1,22 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import load_dotenv from dotenv
+import os from os
+
+load_dotenv()                    
+user = os.environ.get('user')
+password = os.environ.get('password')
+
 
 const app = express();
 const port = 3000;
 
 const db = new pg.Client({
-  user: "postgres",
+  user: user,
   host: "localhost",
   database: "world",
-  password: "onepercentathlete",
+  password: password,
   port: 5433,
 });
 db.connect();
@@ -20,8 +27,8 @@ app.use(express.static("public"));
 let currentUserId = 1;
 
 let users = [
-  { id: 1, name: "Angela", color: "teal" },
-  { id: 2, name: "Jack", color: "powderblue" },
+  { id: 1, name: "Aya", color: "teal" },
+  { id: 2, name: "Ryu", color: "powderblue" },
 ];
 
 async function checkVisisted() {
